@@ -1,6 +1,6 @@
 import { createClient } from 'pexels';
 export default function fetchImages(setPhotos) {
-  const client = createClient();
+  const client = createClient(process.env.API_KEY);
   const query = 'persons';
   const orientation = 'square';
   const size = 'small';
