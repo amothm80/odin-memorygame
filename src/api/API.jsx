@@ -1,7 +1,7 @@
 import { createClient } from 'pexels';
 export default function fetchImages(setPhotos) {
   const client = createClient(import.meta.env.VITE_API_KEY);
-  const query = 'persons';
+  const query = 'cars';
   const orientation = 'square';
   const size = 'small';
 
@@ -14,8 +14,9 @@ export default function fetchImages(setPhotos) {
     response.photos.forEach((el) => {
       locImages.push(el.src.tiny);
     });
-    setPhotos(locImages);
     // console.log(locImages);
+    setPhotos(locImages);
+    
     // setImages(locImages);
   }
 }
