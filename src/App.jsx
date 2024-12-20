@@ -7,23 +7,23 @@ import MainBody from './view/MainBody.jsx';
 import './App.css';
 
 export default function App() {
-  const [photos, setPhotos] = useState([]);
   const [game, setGame] = useState(new MemoryGame());
   const [score, setScore] = useState(0);
   const [hiScore, setHiScore] = useState(0);
 
-  useEffect(() => {
-    fetchImages(setPhotos);
-  }, []);
-  useEffect(() => {
-    let gameClone = Object.assign(
-      Object.create(Object.getPrototypeOf(game)),
-      game
-    );
+  useEffect(()=>{
+    const initializeGame = async () => {
+      const photos = await fetchImages();
+      const gameClone = Object.assign(
+        Object.create(Object.getPrototypeOf(game)),
+        game
+      );
+      gameClone.setPhotos(photos);
+      setGame(gameClone);
+    };
 
-    gameClone.setPhotos(photos);
-    setGame(gameClone);
-  }, [photos]);
+    initializeGame();
+  },[])
 
   return (
     <>
